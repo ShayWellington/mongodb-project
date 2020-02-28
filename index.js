@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const config = require('./config.json');
+const product = require('./Products.json');
 
 const port = 3000;
 
@@ -25,7 +26,27 @@ db.once('open', function() {
   console.log('We are connected to mongo db');
 });
 
+app.use((req,res,next)=>{
+  console.log(`${req.method} request for ${req.url}`);
+  next(); // include this to go to the next middleware
+});
+
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
+app.get('/allProducts', (req, res) =>{
+  res.json(product);
+});
+
+app.get('/product/p=:id', (req,res)=>{
+  const idParam = req.params.id;
+  for (let i =0; i < product.length; i++){
+
+    if (idParam === product[i].id) {
+      res.json(product[i]);
+    }
+  }
+})
+
+// Always keep at bottom so you can see errors reported
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
