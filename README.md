@@ -14,7 +14,12 @@ Instructions for cloning the project
   
   Config.json 
   - Create config.json in root folder 
-  - Add info 
+  - Add...
+{
+"MONGO_USER" : "*username*",
+"MONGO_PASSWORD : "*password*", 
+"MONGO_CLUSTER_NAME : "*clustername*" 
+}
   
   Running Server
   - vagrant ssh 
